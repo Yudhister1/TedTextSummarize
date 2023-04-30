@@ -1,3 +1,9 @@
-<!DOCTYPE html>
+<py-config>
+    plugins = [
+      "https://pyscript.net/latest/plugins/python/py_tutor.py"
+    ]
+    [[fetch]]
+    files = ["./utils.py", "./todo.py"]
+</py-config>
 
-<h1>Hi</h1>
+<py-script src="./todo.py"></py-script>
