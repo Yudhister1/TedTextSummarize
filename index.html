@@ -3,16 +3,25 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Greetings!</title>
+    <title>TL;DR...!</title>
     <!-- linking to PyScript assets -->
     <link rel="stylesheet" href="https://pyscript.net/releases/2022.12.1/pyscript.css" />
+   <link rel="stylesheet" type="text/css" href="styles.css" />
     <script defer src="https://pyscript.net/releases/2022.12.1/pyscript.js"></script>
   </head>
   <body>
     <!-- <py-config>
-        packages = ['openai']
+        packages = ['cv2']
     </py-config> -->
+    <div class="container">
+        <form>
+        <textarea name="" id="textarea" cols="30" placeholder="TL;DR..." data-min-rows='5'></textarea>
+        <button id="click-btn" type="button" py-onClick="handle_click()">Search</button>
+      </form>
+    </div>
+    <br>
     <div id="prompt"></div>
+    <div id="output"></div>
     <div id="completion"></div>
     <py-script src="./main.py"></py-script>
     
