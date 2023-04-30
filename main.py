@@ -10,10 +10,10 @@ import os
 # textarea = document.getElementById("textarea")
 # textarea.innerHTML = "ffdfd"
 # print(textarea.innerHTML)
-
+print (os.environ)
 
 def handle_click():
-    print (os.environ)
+    
     print("bearer: ", os.getenv("OPENAI_API_KEY"))
     bearer = "Bearer " + os.getenv("OPENAI_API_KEY")
    
