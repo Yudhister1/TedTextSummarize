@@ -1,53 +1,16 @@
-from datetime import datetime as dt
+import os
+import openai
 
-from utils import add_class, remove_class
+openai.api_key = os.getenv("OPENAI_API_KEY")
 
-tasks = []
+response = openai.Completion.create(    
+  model="text-davinci-003",
+  prompt="A neutron star is the collapsed core of a massive supergiant star, which had a total mass of between 10 and 25 solar masses, possibly more if the star was especially metal-rich.[1] Neutron stars are the smallest and densest stellar objects, excluding black holes and hypothetical white holes, quark stars, and strange stars.[2] Neutron stars have a radius on the order of 10 kilometres (6.2 mi) and a mass of about 1.4 solar masses.[3] They result from the supernova explosion of a massive star, combined with gravitational collapse, that compresses the core past white dwarf star density to that of atomic nuclei.\n\nTl;dr",
+  temperature=0.7,
+  max_tokens=60,
+  top_p=1.0,
+  frequency_penalty=0.0,
+  presence_penalty=1
+)
 
-# define the task template that will be use to render new templates to the page
-task_template = Element("task-template").select(".task", from_content=True)
-task_list = Element("list-tasks-container")
-new_task_content = Element("new-task-content")
-
-
-def add_task(*ags, **kws):
-    # ignore empty task
-    if not new_task_content.element.value:
-        return None
-
-    # create task
-    task_id = f"task-{len(tasks)}"
-    task = {
-        "id": task_id,
-        "content": new_task_content.element.value,
-        "done": False,
-        "created_at": dt.now(),
-    }
-
-    tasks.append(task)
-
-    # add the task element to the page as new node in the list by cloning from a
-    # template
-    task_html = task_template.clone(task_id)
-    task_html_content = task_html.select("p")
-    task_html_content.element.innerText = task["content"]
-    task_html_check = task_html.select("input")
-    task_list.element.appendChild(task_html.element)
-
-    def check_task(evt=None):
-        task["done"] = not task["done"]
-        if task["done"]:
-            add_class(task_html_content, "line-through")
-        else:
-            remove_class(task_html_content, "line-through")
-
-    new_task_content.clear()
-    task_html_check.element.onclick = check_task
-
-
-def add_task_event(e):
-    if e.key == "Enter":
-        add_task()
-
-
-new_task_content.element.onkeypress = add_task_event
+print('Summarized Response: ', response["choices"][0]["text"])
