@@ -15,11 +15,11 @@ jobs:
     steps:
       - name: step 1
         ## Reference your environment variables
-        run: echo "The API key is:${{env.API_KEY}}"   
+        run: echo "The API key is:${{secrets.API_KEY}}"   
 
   job2:
     runs-on: ubuntu-latest
     steps:
       - name: step 1
         ## Another way reference your environment variables
-        run: echo "The API key is:$API_KEY"
+        run: echo "The API key is:${{secrets.API_KEY}}"
