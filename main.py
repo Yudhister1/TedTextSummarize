@@ -14,7 +14,7 @@ print (os.environ)
 
 def handle_click():
     
-    print("bearer: ", os.getenv("OPENAI_API_KEY"))
+    print("bearer: ", os.getenv('PATH'))
     bearer = "Bearer " + os.getenv("OPENAI_API_KEY")
    
     promptDiv = document.getElementById("prompt")
